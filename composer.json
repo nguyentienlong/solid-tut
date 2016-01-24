@@ -1,0 +1,15 @@
+{
+    "name": "longka/solid-demo",
+    "authors": [
+        {
+            "name": "long nguyen",
+            "email": "nguyentienlong88@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+    	"psr-4": {
+    		"Longka\\": "src/"	
+		}
+	}
+}
