@@ -3,6 +3,7 @@
 namespace Longka;
 
 use PDO;
+use Longka\Database;
 
 class Student
 {
@@ -39,24 +40,21 @@ class Student
         $courses = [];
 
         //database connection info
-        $dbHost = '127.0.0.1';
-        $dbName = 'phptut';
-        $dbUser = 'postgres';
-        $dbPass = 'postgres';
-
-        try {
             //new pdo object	
-            $db = new PDO("pgsql:dbname=$dbName;host=$dbHost", $dbUser, $dbPass);
+		try {
+			$db = new Database();
+			$conn = $db->getPostgresDbConnection();
+
 			$query = "SELECT course.id, course.name from enrollment, course where enrollment.course_id = course.id and " . 
 					"enrollment.student_id = " . $this->studentId;
-			$result = $db->query($query);
+			$result = $conn->query($query);
 			var_dump($result);
-            foreach ($result as $row) {
+        	foreach ($result as $row) {
 				$courses[] = [
 						'id' => $row['id'],
 						'name' => $row['name'],
 				];
-            }
+			}		
         } catch (Exception $e) {
             throw $e;
         }
