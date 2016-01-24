@@ -48,7 +48,6 @@ class Student
 			$query = "SELECT course.id, course.name from enrollment, course where enrollment.course_id = course.id and " . 
 					"enrollment.student_id = " . $this->studentId;
 			$result = $conn->query($query);
-			var_dump($result);
         	foreach ($result as $row) {
 				$courses[] = [
 						'id' => $row['id'],
