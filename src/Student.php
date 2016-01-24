@@ -40,20 +40,21 @@ class Student
         $courses = [];
 
         //database connection info
-            //new pdo object	
-		try {
-			$db = new Database();
-			$conn = $db->getPostgresDbConnection();
+        //new pdo object	
 
-			$query = "SELECT course.id, course.name from enrollment, course where enrollment.course_id = course.id and " . 
-					"enrollment.student_id = " . $this->studentId;
-			$result = $conn->query($query);
-        	foreach ($result as $row) {
-				$courses[] = [
-						'id' => $row['id'],
-						'name' => $row['name'],
-				];
-			}		
+        try {
+            $db = new Database();
+            $conn = $db->getPostgresDbConnection();
+
+            $query = "SELECT course.id, course.name from enrollment, course where enrollment.course_id = course.id and " .
+                    "enrollment.student_id = " . $this->studentId;
+            $result = $conn->query($query);
+            foreach ($result as $row) {
+                $courses[] = [
+                        'id' => $row['id'],
+                        'name' => $row['name'],
+                ];
+            }
         } catch (Exception $e) {
             throw $e;
         }
